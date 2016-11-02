@@ -4,7 +4,11 @@ module Users
 
   def self.create_bash_profile
     unless File.file? BASH_PROFILE
-      system "#{BASH_PROFILE_GIT} > #{BASH_PROFILE}"
+      system "curl #{BASH_PROFILE_GIT} > #{BASH_PROFILE}"
     end
+  end
+
+  def self.reload_bash_profile
+    system "source #{BASH_PROFILE}"
   end
 end

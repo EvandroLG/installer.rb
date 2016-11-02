@@ -1,10 +1,10 @@
-require 'colorize'
+require_relative 'colorize'
 
 module Ruby
   RVM_FILE = '/Users/admin/.rvm/bin/rvm'
 
   def self.install_rvm
-    unless FILE.file? RVM_FILE
+    unless File.file? RVM_FILE
       system 'curl -sSL https://get.rvm.io | bash -s stable'
     end
 
