@@ -1,3 +1,4 @@
+require_relative 'output'
 require_relative 'colorize'
 require_relative 'brew'
 
@@ -8,11 +9,6 @@ module Node
     Brew.install
     Brew.update
 
-    unless File.file? NODE_FILE
-      system 'brew install node'
-      return
-    end
-
-    puts red('node has already been installed!')
+    Output.do NODE_FILE, 'brew install node', 'node'
   end
 end

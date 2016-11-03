@@ -1,3 +1,4 @@
+require_relative 'output'
 require_relative 'colorize'
 require_relative 'users'
 
@@ -10,21 +11,11 @@ module Git
   GITCOMPLETION_GIT  = 'https://raw.githubusercontent.com/EvandroLG/dotfiles/master/git/.git-completion.sh'
 
   def self.download_gitignore
-    unless File.file? GITIGNORE_FILE
-      system "curl #{GITIGNORE_GIT} > #{GITIGNORE_FILE}"
-      return
-    end
-
-    puts red('.gitignore file has already been downloaded!')
+    Output.do GITIGNORE_FILE, "curl #{GITIGNORE_GIT} > #{GITIGNORE_FILE}", '.gitignore'
   end
 
   def self.download_gitconfig
-    unless File.file? GITCONFIG_FILE
-      system "curl #{GITCONFIG_GIT} > #{GITCONDIG_FILE}"
-      return
-    end
-
-    puts red('.gitconfig file has already been downloaded!')
+    Output.do GITCONFIG_FILE, "curl #{GITCONFIG_GIT} > #{GITCONFIG_FILE}", '.gitconfig'
   end
 
   def self.download_gitcompletion
@@ -35,7 +26,7 @@ module Git
       return
     end
 
-    puts red('gitcompletion.sh has already been downloaded!')
+    puts red('.gitcompletion.sh has already been downloaded!')
   end
 
   def self.download_files
