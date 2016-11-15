@@ -12,9 +12,23 @@ def all
   Git.download_files
 end
 
+if ARGV.empty? || ARGV[0] == '--help'
+  puts %{
+    Options:
+    --all   install every program
+    --vim   install just vim
+    --node  install just node programs
+    --ruby  install just ruby programs
+    --git   install just git
+  }
+
+  exit
+end
+
+all; exit if ARGV[0] == '--all'
+
 ARGV.each do |arg|
   case arg
-    when '--all' then all
     when '--vim'  then Vim.install_vundle
     when '--node' then Node.install
     when '--ruby' then Ruby.install_rvm
